@@ -1,0 +1,91 @@
+{
+  "name": "Pa Gerry's POS System",
+  "short_name": "Pa Gerry's POS",
+  "description": "Point of Sale System for Pa Gerry's Grill, Wholesale, Building Materials, and Food Supplies",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f8f9fa",
+  "theme_color": "#e67e22",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "en",
+  "icons": [
+      {
+          "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏪</text></svg>",
+          "sizes": "192x192",
+          "type": "image/svg+xml"
+      },
+      {
+          "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏪</text></svg>",
+          "sizes": "512x512",
+          "type": "image/svg+xml"
+      }
+  ],
+  "categories": ["business", "productivity", "utilities"],
+  "shortcuts": [
+      {
+          "name": "Grill POS",
+          "short_name": "Grill",
+          "description": "Quick access to Grill Point of Sale",
+          "url": "/?section=grill&view=pos",
+          "icons": [
+              {
+                  "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔥</text></svg>",
+                  "sizes": "96x96"
+              }
+          ]
+      },
+      {
+          "name": "Wholesale POS",
+          "short_name": "Wholesale",
+          "description": "Quick access to Wholesale Point of Sale",
+          "url": "/?section=wholesale&view=pos",
+          "icons": [
+              {
+                  "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📦</text></svg>",
+                  "sizes": "96x96"
+              }
+          ]
+      },
+      {
+          "name": "Building POS",
+          "short_name": "Building",
+          "description": "Quick access to Building Materials Point of Sale",
+          "url": "/?section=building&view=pos",
+          "icons": [
+              {
+                  "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔨</text></svg>",
+                  "sizes": "96x96"
+              }
+          ]
+      },
+      {
+          "name": "Food POS",
+          "short_name": "Food",
+          "description": "Quick access to Food Supplies Point of Sale",
+          "url": "/?section=food&view=pos",
+          "icons": [
+              {
+                  "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛒</text></svg>",
+                  "sizes": "96x96"
+              }
+          ]
+      }
+  ],
+  "share_target": {
+      "action": "/handle-share/",
+      "method": "POST",
+      "enctype": "multipart/form-data",
+      "params": {
+          "title": "title",
+          "text": "text",
+          "url": "url",
+          "files": [
+              {
+                  "name": "receipts",
+                  "accept": ["image/*", "application/pdf"]
+              }
+          ]
+      }
+  }
+}
