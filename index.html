@@ -9,7 +9,10 @@
     <!-- PWA Manifest -->
     <link rel="manifest" href="/manifest.json">
     <meta name="theme-color" content="#e67e22">
+    
+    <!-- FIXED: Added the new meta tag and kept the old one for compatibility -->
     <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="Pa Gerry's POS">
     <meta name="application-name" content="Pa Gerry's POS">
@@ -100,39 +103,8 @@
             font-size: 1.5rem;
             font-weight: 600;
         }
-
-        .login-tabs {
-            display: flex;
-            margin-bottom: 1.5rem;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .login-tab {
-            flex: 1;
-            padding: 0.75rem;
-            text-align: center;
-            cursor: pointer;
-            font-weight: 600;
-            border-bottom: 3px solid transparent;
-            transition: all 0.3s;
-        }
-
-        .login-tab:hover {
-            background-color: var(--light-gray);
-        }
-
-        .login-tab.active {
-            border-bottom-color: var(--primary-color);
-            color: var(--primary-color);
-        }
-
-        .login-tab-content {
-            display: none;
-        }
-
-        .login-tab-content.active {
-            display: block;
-        }
+        
+        /* REMOVED: Login tab styles as they are no longer needed */
 
         .form-group {
             margin-bottom: 1.5rem;
@@ -1248,37 +1220,20 @@
                     <h2 class="login-title">Sign In</h2>
                 </div>
                 
-                <div class="login-tabs">
-                    <div class="login-tab active" data-tab="email">Email</div>
-                    <div class="login-tab" data-tab="phone">Phone</div>
-                </div>
-                
-                <div id="email-tab" class="login-tab-content active">
-                    <form id="emailLoginForm">
-                        <div class="form-group">
-                            <label class="form-label" for="email">Email Address</label>
-                            <input type="email" id="email" class="form-input" placeholder="Enter your email" required>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label" for="password">Password</label>
-                            <input type="password" id="password" class="form-input" placeholder="Enter your password" required>
-                        </div>
-                        <div id="email-login-error" class="error-message"></div>
-                        <button type="submit" class="login-btn" id="emailLoginBtn">Sign In</button>
-                        <a href="#" class="forgot-password" id="forgotPasswordLink">Forgot Password?</a>
-                    </form>
-                </div>
-                
-                <div id="phone-tab" class="login-tab-content">
-                    <form id="phoneLoginForm">
-                        <div class="form-group">
-                            <label class="form-label" for="phoneNumber">Phone Number</label>
-                            <input type="tel" id="phoneNumber" class="form-input" placeholder="+234 800 000 0000" required>
-                        </div>
-                        <div id="phone-login-error" class="error-message"></div>
-                        <button type="submit" class="login-btn" id="phoneLoginBtn">Send Verification Code</button>
-                    </form>
-                </div>
+                <!-- REMOVED: Login tabs, now only showing email form -->
+                <form id="emailLoginForm">
+                    <div class="form-group">
+                        <label class="form-label" for="email">Email Address</label>
+                        <input type="email" id="email" class="form-input" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="password">Password</label>
+                        <input type="password" id="password" class="form-input" placeholder="Enter your password" required>
+                    </div>
+                    <div id="email-login-error" class="error-message"></div>
+                    <button type="submit" class="login-btn" id="emailLoginBtn">Sign In</button>
+                    <a href="#" class="forgot-password" id="forgotPasswordLink">Forgot Password?</a>
+                </form>
             </div>
         </div>
     </div>
@@ -2484,28 +2439,6 @@
         </div>
     </div>
 
-    <!-- Phone Verification Modal -->
-    <div id="phoneVerificationModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title">Verify Phone Number</h3>
-                <button class="modal-close" onclick="closeModal('phoneVerificationModal')">&times;</button>
-            </div>
-            <div class="modal-body">
-                <p>Enter the 6-digit verification code sent to your phone:</p>
-                <div class="form-group">
-                    <label class="form-label">Verification Code</label>
-                    <input type="text" class="form-input" id="verificationCode" maxlength="6" placeholder="123456">
-                </div>
-                <div id="phone-verification-error" class="error-message"></div>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" onclick="closeModal('phoneVerificationModal')">Cancel</button>
-                <button class="btn btn-primary" onclick="verifyPhoneCode()">Verify</button>
-            </div>
-        </div>
-    </div>
-
     <!-- Forgot Password Modal -->
     <div id="forgotPasswordModal" class="modal">
         <div class="modal-content">
@@ -2660,7 +2593,6 @@
         let currentView = 'pos';
         let currentFilter = 'all';
         let currentUser = null;
-        let confirmationResult = null;
 
         // Listen for authentication state changes
         auth.onAuthStateChanged((user) => {
@@ -2871,23 +2803,7 @@
 
         // Initialize login functionality
         document.addEventListener('DOMContentLoaded', function() {
-            // Login tab switching
-            const loginTabs = document.querySelectorAll('.login-tab');
-            loginTabs.forEach(tab => {
-                tab.addEventListener('click', function() {
-                    const tabName = this.getAttribute('data-tab');
-                    
-                    // Update active tab
-                    loginTabs.forEach(t => t.classList.remove('active'));
-                    this.classList.add('active');
-                    
-                    // Show corresponding content
-                    document.querySelectorAll('.login-tab-content').forEach(content => {
-                        content.classList.remove('active');
-                    });
-                    document.getElementById(`${tabName}-tab`).classList.add('active');
-                });
-            });
+            // REMOVED: Login tab switching logic
             
             // Email login form
             document.getElementById('emailLoginForm').addEventListener('submit', function(e) {
@@ -2911,41 +2827,6 @@
                     });
             });
             
-            // Phone login form
-            document.getElementById('phoneLoginForm').addEventListener('submit', function(e) {
-                e.preventDefault();
-                const phoneNumber = document.getElementById('phoneNumber').value;
-                const errorElement = document.getElementById('phone-login-error');
-                
-                // Show loading state
-                document.getElementById('phoneLoginBtn').disabled = true;
-                document.getElementById('phoneLoginBtn').textContent = 'Sending Code...';
-                
-                // Setup reCAPTCHA verifier
-                window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('phoneLoginBtn', {
-                    'size': 'invisible',
-                    'callback': (response) => {
-                        // reCAPTCHA solved, allow signInWithPhoneNumber.
-                    }
-                });
-                
-                auth.signInWithPhoneNumber(phoneNumber, window.recaptchaVerifier)
-                    .then((result) => {
-                        // SMS sent. Prompt user to type the code from the message
-                        confirmationResult = result;
-                        document.getElementById('phoneLoginBtn').disabled = false;
-                        document.getElementById('phoneLoginBtn').textContent = 'Send Verification Code';
-                        
-                        // Show verification modal
-                        document.getElementById('phoneVerificationModal').classList.add('active');
-                    })
-                    .catch((error) => {
-                        errorElement.textContent = error.message;
-                        document.getElementById('phoneLoginBtn').disabled = false;
-                        document.getElementById('phoneLoginBtn').textContent = 'Send Verification Code';
-                    });
-            });
-            
             // Forgot password link
             document.getElementById('forgotPasswordLink').addEventListener('click', function(e) {
                 e.preventDefault();
@@ -2957,22 +2838,6 @@
                 auth.signOut();
             });
         });
-
-        // Verify phone code
-        function verifyPhoneCode() {
-            const code = document.getElementById('verificationCode').value;
-            const errorElement = document.getElementById('phone-verification-error');
-            
-            confirmationResult.confirm(code)
-                .then((result) => {
-                    // User signed in successfully
-                    const user = result.user;
-                    closeModal('phoneVerificationModal');
-                })
-                .catch((error) => {
-                    errorElement.textContent = error.message;
-                });
-        }
 
         // Reset password
         function resetPassword() {
